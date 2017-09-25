@@ -2,9 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"net/http"
 )
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, World")
+}
+
 func main() {
-	fmt.Println(os.Getenv("GITHUB_ACCESS_TOKEN"))
+	http.HandleFunc("/", handler) // ハンドラを登録してウェブページを表示させる
+	http.ListenAndServe(":3000", nil)
 }
