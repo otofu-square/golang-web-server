@@ -1,0 +1,11 @@
+#!/bin/bash
+# Only use this script in docker
+
+# Install & update packages
+apt-get update && apt-get -y upgrade && apt-get -y install wget
+
+# Install Mitamaie
+if [ ! -e /bin/mitamae ]; then
+  wget https://github.com/itamae-kitchen/mitamae/releases/download/v1.5.1/mitamae-x86_64-linux -O /bin/mitamae
+  chmod 777 /bin/mitamae
+fi
