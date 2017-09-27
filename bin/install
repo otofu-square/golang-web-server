@@ -9,3 +9,6 @@ if [ ! -e /bin/mitamae ]; then
   wget https://github.com/itamae-kitchen/mitamae/releases/download/v1.5.1/mitamae-x86_64-linux -O /bin/mitamae
   chmod 777 /bin/mitamae
 fi
+
+# Provisioning
+mitamae local recipe.rb -l debug
