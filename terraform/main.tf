@@ -81,12 +81,18 @@ resource "aws_security_group_rule" "all" {
   security_group_id = "${aws_security_group.app.id}"
 }
 
+resource "aws_key_pair" "auth" {
+  key_name   = "golang-web-server"
+  public_key = "${file("~/.ssh/golang-web-server")}"
+}
+
 resource "aws_instance" "golang-web-server-tf-instance" {
-  ami                         = "ami-374db956"
+  ami                         = "ami-8422ebe2"
   instance_type               = "t2.micro"
   vpc_security_group_ids      = ["${aws_security_group.app.id}"]
   subnet_id                   = "${aws_subnet.golang-web-server-public-web.id}"
   associate_public_ip_address = "true"
+  key_name                    = "${aws_key_pair.auth.id}"
   root_block_device = {
     volume_type = "gp2"
     volume_size = "20"

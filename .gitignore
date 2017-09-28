@@ -18,3 +18,9 @@ vendor
 
 # Compiled binary file
 main
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+*.tfvars
