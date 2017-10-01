@@ -10,3 +10,11 @@ end
 package "nginx" do
   action :install
 end
+
+remote_file "/etc/nginx/nginx.conf" do
+  source "/app/nginx/nginx.conf"
+end
+
+service "nginx" do
+  action [:enable, :start]
+end
