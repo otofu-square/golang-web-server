@@ -1,15 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"encoding/json"
+	"os"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World")
+type RequestBody struct {
 }
 
 func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":3000", nil)
+	token := os.Getenv("LINE_CHANNEL_ACCESS_TOKEN")
+	endpoint := "https://api.line.me/v2/bot/message/push"
+
+	json.Marshal()
 }
