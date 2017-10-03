@@ -14,7 +14,7 @@ type Todo struct {
 type TransformedTodo struct {
 	ID        uint   `json:"id"`
 	Title     string `json:"title"`
-	Completed int    `json:"completed"`
+	Completed bool   `json:"completed"`
 }
 
 func Database() *gorm.DB {
