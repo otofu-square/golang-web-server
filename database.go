@@ -18,7 +18,7 @@ type TransformedTodo struct {
 }
 
 func Database() *gorm.DB {
-	db, err := gorm.Open("mysql", "root:@demo?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", "root:12345@/demo?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic("failed to connect database")
 	}
