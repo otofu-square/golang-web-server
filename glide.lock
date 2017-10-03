@@ -1,5 +1,5 @@
 hash: 6dda7def19a41f413177ec9a5ba0e729b01ad3d0cdffd9a72192f79d85ff332e
-updated: 2017-10-03T21:27:49.465217134+09:00
+updated: 2017-10-03T21:51:13.622375571+09:00
 imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
@@ -17,6 +17,8 @@ imports:
   - proto
 - name: github.com/jinzhu/gorm
   version: 5174cc5c242a728b435ea2be8a2f7f998e15429b
+- name: github.com/jinzhu/inflection
+  version: 1c35d901db3da928c72a72d8458480cc9ade058f
 - name: github.com/json-iterator/go
   version: abe3c4016bd3f50fa9c5b0e909641e2b8370b0cf
 - name: github.com/mattn/go-isatty
