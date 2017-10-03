@@ -1,3 +1,3 @@
 package: .
 import:
-- package: github.com/graphql-go/graphql
+- package: github.com/gin-gonic/gin
