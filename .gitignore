@@ -18,6 +18,7 @@ vendor
 
 # Compiled binary file
 main
+golang-web-server
 
 # Terraform
 *.tfstate
