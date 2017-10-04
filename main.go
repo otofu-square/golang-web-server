@@ -64,6 +64,24 @@ func FetchSingleTodo(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todo})
 }
 
+func UpdateTodo(c *gin.Context) {
+	var todo Todo
+	todoID := c.Param("id")
+
+	db := Database()
+	db.First(&todo, todoID)
+
+	if todo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
+		return
+	}
+
+	db.Model(&todo).Update("title", c.PostForm("title"))
+	completed, _ := strconv.Atoi(c.PostForm("completed"))
+	db.Model(&todo).Update("completed", completed)
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo updated successfully!"})
+}
+
 func main() {
 	db := Database()
 	db.AutoMigrate(&Todo{})
@@ -73,8 +91,8 @@ func main() {
 	{
 		v1.POST("/", CreateTodo)
 		v1.GET("/", FetchAllTodo)
-		// v1.GET("/:id", FetchSingleTodo)
-		// v1.PUT("/:id", UpdateTodo)
+		v1.GET("/:id", FetchSingleTodo)
+		v1.PUT("/:id", UpdateTodo)
 		// v1.DELETE("/:id", DeleteTodo)
 	}
 	r.Run()
