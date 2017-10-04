@@ -82,6 +82,22 @@ func UpdateTodo(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo updated successfully!"})
 }
 
+func DeleteTodo(c *gin.Context) {
+	var todo Todo
+	todoID := c.Param("id")
+
+	db := Database()
+	db.First(&todo, todoID)
+
+	if todo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
+		return
+	}
+
+	db.Delete(&todo)
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo deleted successfully!"})
+}
+
 func main() {
 	db := Database()
 	db.AutoMigrate(&Todo{})
@@ -93,7 +109,7 @@ func main() {
 		v1.GET("/", FetchAllTodo)
 		v1.GET("/:id", FetchSingleTodo)
 		v1.PUT("/:id", UpdateTodo)
-		// v1.DELETE("/:id", DeleteTodo)
+		v1.DELETE("/:id", DeleteTodo)
 	}
 	r.Run()
 }
