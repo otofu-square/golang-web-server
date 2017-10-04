@@ -37,7 +37,10 @@ func FetchAllTodo(c *gin.Context) {
 	for _, item := range todos {
 		_todos = append(_todos, CreateTransformedTodo(&item))
 	}
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todos})
+	c.JSON(http.StatusOK, gin.H{
+		"status": http.StatusOK,
+		"data":   _todos,
+	})
 }
 
 func CreateTransformedTodo(todo *Todo) TransformedTodo {
@@ -45,7 +48,11 @@ func CreateTransformedTodo(todo *Todo) TransformedTodo {
 	if todo.Completed == 1 {
 		completed = true
 	}
-	return TransformedTodo{ID: todo.ID, Title: todo.Title, Completed: completed}
+	return TransformedTodo{
+		ID:        todo.ID,
+		Title:     todo.Title,
+		Completed: completed,
+	}
 }
 
 func FetchSingleTodo(c *gin.Context) {
@@ -61,7 +68,10 @@ func FetchSingleTodo(c *gin.Context) {
 	}
 
 	_todo := CreateTransformedTodo(&todo)
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todo})
+	c.JSON(http.StatusOK, gin.H{
+		"status": http.StatusOK,
+		"data":   _todo,
+	})
 }
 
 func UpdateTodo(c *gin.Context) {
@@ -79,7 +89,10 @@ func UpdateTodo(c *gin.Context) {
 	db.Model(&todo).Update("title", c.PostForm("title"))
 	completed, _ := strconv.Atoi(c.PostForm("completed"))
 	db.Model(&todo).Update("completed", completed)
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo updated successfully!"})
+	c.JSON(http.StatusOK, gin.H{
+		"status":  http.StatusOK,
+		"message": "Todo updated successfully!",
+	})
 }
 
 func DeleteTodo(c *gin.Context) {
@@ -95,7 +108,10 @@ func DeleteTodo(c *gin.Context) {
 	}
 
 	db.Delete(&todo)
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo deleted successfully!"})
+	c.JSON(http.StatusOK, gin.H{
+		"status":  http.StatusOK,
+		"message": "Todo deleted successfully!",
+	})
 }
 
 func main() {
