@@ -35,13 +35,17 @@ func FetchAllTodo(c *gin.Context) {
 	}
 
 	for _, item := range todos {
-		completed := false
-		if item.Completed == 1 {
-			completed = true
-		}
-		_todos = append(_todos, TransformedTodo{ID: item.ID, Title: item.Title, Completed: completed})
+		_todos = append(_todos, CreateTransformedTodo(&item))
 	}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todos})
+}
+
+func CreateTransformedTodo(todo *Todo) TransformedTodo {
+	completed := false
+	if todo.Completed == 1 {
+		completed = true
+	}
+	return TransformedTodo{ID: todo.ID, Title: todo.Title, Completed: completed}
 }
 
 func FetchSingleTodo(c *gin.Context) {
@@ -56,11 +60,7 @@ func FetchSingleTodo(c *gin.Context) {
 		return
 	}
 
-	completed := false
-	if todo.Completed == 1 {
-		completed = true
-	}
-	_todo := TransformedTodo{ID: todo.ID, Title: todo.Title, Completed: completed}
+	_todo := CreateTransformedTodo(&todo)
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todo})
 }
 
