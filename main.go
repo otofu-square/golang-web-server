@@ -44,6 +44,26 @@ func FetchAllTodo(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todos})
 }
 
+func FetchSingleTodo(c *gin.Context) {
+	var todo Todo
+	todoID := c.Param("id")
+
+	db := Database()
+	db.First(&todo, todoID)
+
+	if todo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
+		return
+	}
+
+	completed := false
+	if todo.Completed == 1 {
+		completed = true
+	}
+	_todo := TransformedTodo{ID: todo.ID, Title: todo.Title, Completed: completed}
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todo})
+}
+
 func main() {
 	db := Database()
 	db.AutoMigrate(&Todo{})
