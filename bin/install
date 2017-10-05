@@ -11,4 +11,4 @@ if [ ! -e /bin/mitamae ]; then
 fi
 
 # Provisioning
-mitamae local recipe.rb -l debug
+mitamae local ./cookbooks/recipe.rb -l debug
