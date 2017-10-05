@@ -1,1 +1,2 @@
-include_cookbook 'nginx'
+include_recipe 'mysql'
+include_recipe 'nginx'
