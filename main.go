@@ -63,7 +63,10 @@ func FetchSingleTodo(c *gin.Context) {
 	db.First(&todo, todoID)
 
 	if todo.ID == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
+		c.JSON(http.StatusNotFound, gin.H{
+			"status":  http.StatusNotFound,
+			"message": "No todo found!",
+		})
 		return
 	}
 
@@ -82,7 +85,10 @@ func UpdateTodo(c *gin.Context) {
 	db.First(&todo, todoID)
 
 	if todo.ID == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
+		c.JSON(http.StatusNotFound, gin.H{
+			"status":  http.StatusNotFound,
+			"message": "No todo found!",
+		})
 		return
 	}
 
@@ -103,7 +109,10 @@ func DeleteTodo(c *gin.Context) {
 	db.First(&todo, todoID)
 
 	if todo.ID == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
+		c.JSON(http.StatusNotFound, gin.H{
+			"status":  http.StatusNotFound,
+			"message": "No todo found!",
+		})
 		return
 	}
 
