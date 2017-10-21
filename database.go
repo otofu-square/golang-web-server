@@ -5,6 +5,8 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
+var DB *gorm.DB = Database()
+
 type Todo struct {
 	gorm.Model
 	Title     string `json:"title"`

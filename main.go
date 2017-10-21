@@ -10,8 +10,7 @@ import (
 func CreateTodo(c *gin.Context) {
 	completed, _ := strconv.Atoi(c.PostForm("completed"))
 	todo := Todo{Title: c.PostForm("title"), Completed: completed}
-	db := Database()
-	db.Save(&todo)
+	DB.Save(&todo)
 	c.JSON(http.StatusCreated, gin.H{
 		"status":     http.StatusCreated,
 		"message":    "Todo item created successfully!",
@@ -23,8 +22,7 @@ func FetchAllTodo(c *gin.Context) {
 	var todos []Todo
 	var _todos []TransformedTodo
 
-	db := Database()
-	db.Find(&todos)
+	DB.Find(&todos)
 
 	if len(todos) <= 0 {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -59,8 +57,7 @@ func FetchSingleTodo(c *gin.Context) {
 	var todo Todo
 	todoID := c.Param("id")
 
-	db := Database()
-	db.First(&todo, todoID)
+	DB.First(&todo, todoID)
 
 	if todo.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -81,8 +78,7 @@ func UpdateTodo(c *gin.Context) {
 	var todo Todo
 	todoID := c.Param("id")
 
-	db := Database()
-	db.First(&todo, todoID)
+	DB.First(&todo, todoID)
 
 	if todo.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -105,8 +101,7 @@ func DeleteTodo(c *gin.Context) {
 	var todo Todo
 	todoID := c.Param("id")
 
-	db := Database()
-	db.First(&todo, todoID)
+	DB.First(&todo, todoID)
 
 	if todo.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -124,8 +119,7 @@ func DeleteTodo(c *gin.Context) {
 }
 
 func main() {
-	db := Database()
-	db.AutoMigrate(&Todo{})
+	DB.AutoMigrate(&Todo{})
 
 	r := gin.Default()
 	v1 := r.Group("/api/v1/todos")
